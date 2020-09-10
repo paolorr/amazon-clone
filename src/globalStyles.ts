@@ -6,6 +6,7 @@ export default createGlobalStyle`
   }
 
   body {
+    background-color: rgb(234, 237, 237);
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

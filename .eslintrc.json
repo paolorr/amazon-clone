@@ -49,7 +49,9 @@
           "tsx": "never"
         }
       ],
-      "jsx-a11y/alt-text": "off"
+      "jsx-a11y/alt-text": "off",
+      "jsx-a11y/accessible-emoji": "off",
+      "react/prop-types": "off"
     },
     "settings": {
       "import/resolver": {
