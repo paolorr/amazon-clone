@@ -1,16 +1,10 @@
 import React, { useCallback } from 'react';
 
-import { useCart } from '../../cart';
+import { Product as CartProduct, useCart } from '../../cart';
 
 import { Container, ProductInfo, ProductPrice, ProductRating } from './styles';
 
-type ProductProps = {
-  id: string;
-  title: string;
-  price: number;
-  rating: number;
-  image: string;
-};
+type ProductProps = CartProduct;
 
 const Product: React.FC<ProductProps> = ({
   id,

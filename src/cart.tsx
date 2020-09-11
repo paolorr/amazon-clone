@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 
-interface Product {
+export interface Product {
   id: string;
   title: string;
   price: number;
