@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, Banner, Row } from './styles';
 
-import Product from '../Product';
+import Product from './Product';
 
 const Home: React.FC = () => (
   <Container>

@@ -9,7 +9,7 @@ export const Container = styled.div`
   top: 0;
   z-index: 100;
 
-  > img {
+  > a img {
     width: 100px;
     object-fit: contain;
     margin: 0 20px;
