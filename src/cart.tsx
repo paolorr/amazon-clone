@@ -4,6 +4,7 @@ export interface Product {
   id: string;
   title: string;
   price: number;
+  quantity: number;
   rating: number;
   image: string;
 }
@@ -21,7 +22,7 @@ const initialState: CartContextData = {
 };
 
 type Action =
-  | { type: 'ADD_TO_BASKET'; item: Product }
+  | { type: 'ADD_TO_BASKET'; item: Omit<Product, 'quantity'> }
   | { type: 'REMOVE_FROM_BASKET'; id: string };
 
 const CartContext = createContext<{
@@ -36,18 +37,34 @@ function fixDecimal(value: number) {
   return Number(value.toFixed(2));
 }
 
-function addToBasket(state: CartContextData, item: Product): CartContextData {
+function addToBasket(
+  state: CartContextData,
+  item: Omit<Product, 'quantity'>,
+): CartContextData {
+  let newBasket = [...state.basket];
+  const index = newBasket.findIndex(product => product.id === item.id);
+
+  console.log('called addToBasket');
+
+  if (index < 0) {
+    newBasket = [...newBasket, { ...item, quantity: 1 }];
+  } else {
+    console.log('quantity before:', newBasket[index].quantity);
+    newBasket[index].quantity += 1;
+    console.log('quantity after:', newBasket[index].quantity);
+  }
+
   return {
     ...state,
-    basket: [...state.basket, item],
+    basket: newBasket,
     totalItems: state.totalItems + 1,
     subtotal: fixDecimal(state.subtotal + item.price),
   };
 }
 
 function removeFromBasket(state: CartContextData, id: string): CartContextData {
-  const index = state.basket.findIndex(item => item.id === id);
   const newBasket = [...state.basket];
+  const index = newBasket.findIndex(product => product.id === id);
   let removedItem: Product | undefined;
 
   if (index >= 0) {
@@ -59,9 +76,10 @@ function removeFromBasket(state: CartContextData, id: string): CartContextData {
   return {
     ...state,
     basket: newBasket,
-    totalItems: state.totalItems - (removedItem ? 1 : 0),
+    totalItems: state.totalItems - (removedItem ? removedItem.quantity : 0),
     subtotal: fixDecimal(
-      state.subtotal - (removedItem ? removedItem.price : 0),
+      state.subtotal -
+        (removedItem ? removedItem.price * removedItem.quantity : 0),
     ),
   };
 }
@@ -98,3 +116,5 @@ function useCart(): [CartContextData, React.Dispatch<Action>] {
 }
 
 export { CartProvider, useCart };
+
+// https://youtu.be/B6ay3jAZN5o?t=4204

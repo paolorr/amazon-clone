@@ -4,7 +4,7 @@ import { Product as CartProduct, useCart } from '../../cart';
 
 import { Container, ProductInfo, ProductPrice, ProductRating } from './styles';
 
-type ProductProps = CartProduct;
+type ProductProps = Omit<CartProduct, 'quantity'>;
 
 const Product: React.FC<ProductProps> = ({
   id,
@@ -16,6 +16,8 @@ const Product: React.FC<ProductProps> = ({
   const [state, dispatch] = useCart();
 
   const addToBasket = useCallback(() => {
+    console.log('button clicked');
+
     dispatch({
       type: 'ADD_TO_BASKET',
       item: {

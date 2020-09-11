@@ -34,3 +34,8 @@ export const Price = styled.p``;
 export const Rating = styled.div`
   display: flex;
 `;
+
+export const Quantity = styled.p`
+  font-size: 13px;
+  margin-top: 10px;
+`;

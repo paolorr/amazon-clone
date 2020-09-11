@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Product as CartProduct, useCart } from '../../cart';
 
-import { Container, Info, Title, Price, Rating } from './styles';
+import { Container, Info, Title, Price, Rating, Quantity } from './styles';
 
 type ProductProps = CartProduct;
 
@@ -11,6 +11,7 @@ const Product: React.FC<ProductProps> = ({
   title,
   image,
   price,
+  quantity,
   rating,
 }) => {
   const [state, dispatch] = useCart();
@@ -38,6 +39,11 @@ const Product: React.FC<ProductProps> = ({
               <p key={i}>🌟</p>
             ))}
         </Rating>
+
+        <Quantity>
+          Quantity:
+          {quantity}
+        </Quantity>
 
         <button onClick={removeFromBasket}>Remove from basket</button>
       </Info>

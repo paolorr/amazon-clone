@@ -20,10 +20,12 @@ const Checkout: React.FC = () => {
 
           {basket.map(item => (
             <Product
+              key={item.id}
               id={item.id}
               title={item.title}
               image={item.image}
               price={item.price}
+              quantity={item.quantity}
               rating={item.rating}
             />
           ))}
