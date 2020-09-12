@@ -8,7 +8,9 @@ import Subtotal from './Subtotal';
 import { Container, Left, Basket, Right } from './styles';
 
 const Checkout: React.FC = () => {
-  const [{ basket }, dispatch] = useCart();
+  const {
+    cart: { items: basket },
+  } = useCart();
 
   return (
     <Container>

@@ -13,22 +13,19 @@ const Product: React.FC<ProductProps> = ({
   price,
   rating,
 }) => {
-  const [state, dispatch] = useCart();
+  const { addToCart } = useCart();
 
-  const addToBasket = useCallback(() => {
-    console.log('button clicked');
+  const handleAddToCart = useCallback(() => {
+    console.log('button clicked - add to cart');
 
-    dispatch({
-      type: 'ADD_TO_BASKET',
-      item: {
-        id,
-        title,
-        image,
-        price,
-        rating,
-      },
+    addToCart({
+      id,
+      title,
+      image,
+      price,
+      rating,
     });
-  }, [dispatch, id, title, image, price, rating]);
+  }, [addToCart, id, title, image, price, rating]);
 
   return (
     <Container>
@@ -51,7 +48,7 @@ const Product: React.FC<ProductProps> = ({
 
       <img src={image} />
 
-      <button onClick={addToBasket}>Add to basket</button>
+      <button onClick={handleAddToCart}>Add to cart</button>
     </Container>
   );
 };

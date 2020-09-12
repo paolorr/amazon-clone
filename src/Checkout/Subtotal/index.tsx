@@ -8,7 +8,9 @@ import { useCart } from '../../cart';
 import { Container, Gift } from './styles';
 
 const Subtotal: React.FC = () => {
-  const [{ totalItems, subtotal }, dispatch] = useCart();
+  const {
+    cart: { totalItems, subtotal },
+  } = useCart();
 
   return (
     <Container>

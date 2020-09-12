@@ -14,11 +14,12 @@ const Product: React.FC<ProductProps> = ({
   quantity,
   rating,
 }) => {
-  const [state, dispatch] = useCart();
+  const { removeFromCart } = useCart();
 
-  const removeFromBasket = useCallback(() => {
-    dispatch({ type: 'REMOVE_FROM_BASKET', id });
-  }, [dispatch, id]);
+  const handleRemoveFromCart = useCallback(() => {
+    console.log('button clicked - remove from cart');
+    removeFromCart(id);
+  }, [removeFromCart, id]);
 
   return (
     <Container>
@@ -45,7 +46,7 @@ const Product: React.FC<ProductProps> = ({
           {quantity}
         </Quantity>
 
-        <button onClick={removeFromBasket}>Remove from basket</button>
+        <button onClick={handleRemoveFromCart}>Remove from cart</button>
       </Info>
     </Container>
   );

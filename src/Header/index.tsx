@@ -17,7 +17,9 @@ import {
 } from './styles';
 
 const Header: React.FC = () => {
-  const [{ totalItems }, dispatch] = useCart();
+  const {
+    cart: { totalItems },
+  } = useCart();
 
   return (
     <Container>
