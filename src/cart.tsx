@@ -1,4 +1,6 @@
+/* eslint-disable no-param-reassign */
 import React, { createContext, useContext, useState, useCallback } from 'react';
+import { useImmer } from 'use-immer';
 
 export interface Product {
   id: string;
@@ -18,6 +20,8 @@ interface CartContextData {
   cart: CartState;
   addToCart(item: Omit<Product, 'quantity'>): void;
   removeFromCart(productId: string): void;
+  increaseItem(productId: string): void;
+  decreaseItem(productIf: string): void;
 }
 
 const initialState: CartState = {
@@ -33,62 +37,124 @@ function fixDecimal(value: number) {
 }
 
 const CartProvider: React.FC = ({ children }) => {
-  const [cart, setCart] = useState(initialState);
+  const [cart, setCart] = useImmer(initialState);
 
   const addToCart = useCallback(
     (item: Omit<Product, 'quantity'>): void => {
       console.log('addToCart');
 
-      const newCart = { ...cart };
-      const index = newCart.items.findIndex(product => product.id === item.id);
+      setCart(draftCart => {
+        const index = draftCart.items.findIndex(
+          product => product.id === item.id,
+        );
 
-      if (index < 0) {
-        newCart.items.push({ ...item, quantity: 1 });
-      } else {
-        // console.log('quantity before:', newCart.items[index].quantity);
-        newCart.items[index].quantity += 1;
-        // console.log('quantity after:', newCart.items[index].quantity);
-      }
+        if (index < 0) {
+          draftCart.items.push({ ...item, quantity: 1 });
+        } else {
+          // console.log('quantity before:', draftCart.items[index].quantity);
+          draftCart.items[index].quantity += 1;
+          // console.log('quantity after:', draftCart.items[index].quantity);
+        }
 
-      newCart.totalItems += 1;
-      newCart.subtotal = fixDecimal(newCart.subtotal + item.price);
-
-      console.log(newCart);
-
-      setCart(newCart);
+        draftCart.totalItems += 1;
+        draftCart.subtotal = fixDecimal(draftCart.subtotal + item.price);
+      });
     },
-    [cart],
+    [setCart],
   );
 
   const removeFromCart = useCallback(
     (id: string): void => {
       console.log('removeFromCart');
 
-      const newCart = { ...cart };
-      const index = newCart.items.findIndex(product => product.id === id);
-      let removedItem: Product | undefined;
+      setCart(draftCart => {
+        const index = draftCart.items.findIndex(product => product.id === id);
+        let removedItem: Product;
 
-      if (index >= 0) {
-        [removedItem] = newCart.items.splice(index, 1);
-      } else {
-        alert(`Can't remove product (id: ${id}) as it's not in basket!`);
-        return;
-      }
+        if (index >= 0) {
+          [removedItem] = draftCart.items.splice(index, 1);
+        } else {
+          console.warn(
+            `Can't remove product (id: ${id}) as it's not in basket!`,
+          );
+          return;
+        }
 
-      newCart.totalItems -= removedItem.quantity;
-      newCart.subtotal = fixDecimal(
-        newCart.subtotal - removedItem.price * removedItem.quantity,
-      );
-
-      console.log(newCart);
-
-      setCart(newCart);
+        draftCart.totalItems -= removedItem.quantity;
+        draftCart.subtotal = fixDecimal(
+          draftCart.subtotal - removedItem.price * removedItem.quantity,
+        );
+      });
     },
-    [cart],
+    [setCart],
+  );
+
+  const increaseItem = useCallback(
+    (id: string): void => {
+      console.log('increaseItem');
+
+      setCart(draftCart => {
+        const index = draftCart.items.findIndex(product => product.id === id);
+        let item: Product;
+
+        if (index >= 0) {
+          item = draftCart.items[index];
+        } else {
+          console.warn(
+            `Can't increase product (id: ${id}) as it's not in basket!`,
+          );
+          return;
+        }
+
+        // console.log('quantity before:', item.quantity);
+        item.quantity += 1;
+        // console.log('quantity after:', item.quantity);
+        // console.log(draftCart.items[index].quantity, item.quantity);
+
+        draftCart.totalItems += 1;
+        draftCart.subtotal = fixDecimal(draftCart.subtotal + item.price);
+      });
+    },
+    [setCart],
+  );
+
+  const decreaseItem = useCallback(
+    (id: string): void => {
+      console.log('decreaseItem');
+
+      setCart(draftCart => {
+        const index = draftCart.items.findIndex(product => product.id === id);
+        let item: Product;
+
+        if (index >= 0) {
+          item = draftCart.items[index];
+        } else {
+          console.warn(
+            `Can't decrease product (id: ${id}) as it's not in basket!`,
+          );
+          return;
+        }
+
+        console.log('quantity before:', item.quantity);
+        item.quantity -= 1;
+        console.log('quantity after:', item.quantity);
+        console.log(draftCart.items[index].quantity, item.quantity);
+
+        if (item.quantity <= 0) {
+          draftCart.items.splice(index, 1);
+        }
+
+        draftCart.totalItems -= 1;
+        draftCart.subtotal = fixDecimal(draftCart.subtotal - item.price);
+      });
+    },
+    [setCart],
   );
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, increaseItem, decreaseItem }}
+    >
       {children}
     </CartContext.Provider>
   );
@@ -105,5 +171,3 @@ function useCart(): CartContextData {
 }
 
 export { CartProvider, useCart };
-
-// https://youtu.be/B6ay3jAZN5o?t=4204

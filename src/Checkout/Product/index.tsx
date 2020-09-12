@@ -1,8 +1,18 @@
 import React, { useCallback } from 'react';
+import PlusIcon from '@material-ui/icons/AddOutlined';
+import MinusIcon from '@material-ui/icons/RemoveOutlined';
 
 import { Product as CartProduct, useCart } from '../../cart';
 
-import { Container, Info, Title, Price, Rating, Quantity } from './styles';
+import {
+  Container,
+  Info,
+  Title,
+  Price,
+  Rating,
+  Quantity,
+  IncreaseDecrease,
+} from './styles';
 
 type ProductProps = CartProduct;
 
@@ -14,12 +24,22 @@ const Product: React.FC<ProductProps> = ({
   quantity,
   rating,
 }) => {
-  const { removeFromCart } = useCart();
+  const { removeFromCart, increaseItem, decreaseItem } = useCart();
 
   const handleRemoveFromCart = useCallback(() => {
-    console.log('button clicked - remove from cart');
+    console.log('handleRemoveFromCart');
     removeFromCart(id);
   }, [removeFromCart, id]);
+
+  const handleIncreaseItem = useCallback(() => {
+    console.log('handleIncreaseItem');
+    increaseItem(id);
+  }, [increaseItem, id]);
+
+  const handleDecreaseItem = useCallback(() => {
+    console.log('handleDecreaseItem');
+    decreaseItem(id);
+  }, [increaseItem, id]);
 
   return (
     <Container>
@@ -43,7 +63,15 @@ const Product: React.FC<ProductProps> = ({
 
         <Quantity>
           Quantity:
-          {quantity}
+          <strong>{quantity}</strong>
+          <IncreaseDecrease>
+            <button onClick={handleIncreaseItem}>
+              <PlusIcon />
+            </button>
+            <button onClick={handleDecreaseItem}>
+              <MinusIcon />
+            </button>
+          </IncreaseDecrease>
         </Quantity>
 
         <button onClick={handleRemoveFromCart}>Remove from cart</button>

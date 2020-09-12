@@ -35,7 +35,29 @@ export const Rating = styled.div`
   display: flex;
 `;
 
-export const Quantity = styled.p`
+export const Quantity = styled.div`
   font-size: 13px;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+
+  strong {
+    margin-left: 5px;
+    margin-right: 10px;
+  }
+`;
+
+export const IncreaseDecrease = styled.div`
+  button {
+    width: 20px;
+    height: 17px;
+    border-radius: 2px;
+    margin: 0;
+    margin-right: 2px;
+    padding: 0;
+
+    svg {
+      font-size: 10px;
+    }
+  }
 `;
