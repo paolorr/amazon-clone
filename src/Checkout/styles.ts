@@ -8,6 +8,8 @@ export const Container = styled.div`
 `;
 
 export const Left = styled.div`
+  flex: 1;
+
   > img {
     width: 100%;
     margin-bottom: 10px;

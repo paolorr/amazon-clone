@@ -10,6 +10,8 @@ export const Container = styled.div`
   background-color: #f3f3f3;
   border: 1px solid #dddddd;
   border-radius: 3px;
+  position: sticky;
+  top: 80px;
 
   button {
     background: #f0c14b;
