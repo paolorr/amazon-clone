@@ -1,6 +1,6 @@
 # Amazon Clone :
 
-Amazon clone based on Clever Programmer's [tutorial](https://www.youtube.com/watch?v=_Z6eRoagmz4) using TypeScript and Styles Components instead of Javascript and pure CSS.
+Amazon clone based on Clever Programmer's [tutorial](https://www.youtube.com/watch?v=_Z6eRoagmz4) using TypeScript and Styled Components instead of Javascript and pure CSS.
 
 Check out [live demo](https://clone-9c3af.web.app) deployed at Firebase.
 
