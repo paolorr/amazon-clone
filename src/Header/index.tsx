@@ -3,8 +3,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '../auth';
-import { useCart } from '../cart';
+import { useAuth } from '../Contexts/auth';
+import { useCart } from '../Contexts/cart';
 
 import {
   Container,

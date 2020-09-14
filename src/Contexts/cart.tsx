@@ -135,10 +135,10 @@ const CartProvider: React.FC = ({ children }) => {
           return;
         }
 
-        console.log('quantity before:', item.quantity);
+        // console.log('quantity before:', item.quantity);
         item.quantity -= 1;
-        console.log('quantity after:', item.quantity);
-        console.log(draftCart.items[index].quantity, item.quantity);
+        // console.log('quantity after:', item.quantity);
+        // console.log(draftCart.items[index].quantity, item.quantity);
 
         if (item.quantity <= 0) {
           draftCart.items.splice(index, 1);

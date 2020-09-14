@@ -3,7 +3,7 @@
 import React from 'react';
 import CurrencyFormat from 'react-currency-format';
 
-import { useCart } from '../../cart';
+import { useCart } from '../../Contexts/cart';
 
 import { Container, Gift } from './styles';
 

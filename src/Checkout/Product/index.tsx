@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PlusIcon from '@material-ui/icons/AddOutlined';
 import MinusIcon from '@material-ui/icons/RemoveOutlined';
 
-import { Product as CartProduct, useCart } from '../../cart';
+import { Product as CartProduct, useCart } from '../../Contexts/cart';
 
 import {
   Container,

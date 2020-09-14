@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useAuth } from '../auth';
-import { useCart } from '../cart';
+import { useAuth } from '../Contexts/auth';
+import { useCart } from '../Contexts/cart';
 
 import Product from './Product';
 import Subtotal from './Subtotal';

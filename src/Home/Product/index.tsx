@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { Product as CartProduct, useCart } from '../../cart';
+import { Product as CartProduct, useCart } from '../../Contexts/cart';
 
 import { Container, ProductInfo, ProductPrice, ProductRating } from './styles';
 
