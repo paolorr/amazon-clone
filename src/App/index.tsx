@@ -4,22 +4,26 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from '../globalStyles';
 import Routes from './routes';
 
+import { AuthProvider } from '../auth';
 import { CartProvider } from '../cart';
 
 import Header from '../Header';
 
 import { Container } from './styles';
 
-const App: React.FC = () => (
-  <Router>
-    <GlobalStyle />
-    <CartProvider>
-      <Container>
-        <Header />
-        <Routes />
-      </Container>
-    </CartProvider>
-  </Router>
-);
+const App: React.FC = () => {
+  return (
+    <Router>
+      <GlobalStyle />
+      <AuthProvider>
+        <CartProvider>
+          <Container>
+            <Routes />
+          </Container>
+        </CartProvider>
+      </AuthProvider>
+    </Router>
+  );
+};
 
 export default App;
