@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useCallback } from 'react';
 import { useImmer } from 'use-immer';
 
 export interface Product {

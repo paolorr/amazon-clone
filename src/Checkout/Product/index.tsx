@@ -39,7 +39,7 @@ const Product: React.FC<ProductProps> = ({
   const handleDecreaseItem = useCallback(() => {
     console.log('handleDecreaseItem');
     decreaseItem(id);
-  }, [increaseItem, id]);
+  }, [decreaseItem, id]);
 
   return (
     <Container>
