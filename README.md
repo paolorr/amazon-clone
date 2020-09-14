@@ -1,6 +1,6 @@
-# Amazon Clone
+# Amazon Clone :
 
-Amazon clone based on Clever Programmer's [tutorial](https://www.youtube.com/watch?v=_Z6eRoagmz4) using TypeScript and Style Components instead of Javascript and pure CSS.
+Amazon clone based on Clever Programmer's [tutorial](https://www.youtube.com/watch?v=_Z6eRoagmz4) using TypeScript and Styles Components instead of Javascript and pure CSS.
 
 Check out [live demo](https://clone-9c3af.web.app) deployed at Firebase.
 
@@ -17,7 +17,7 @@ Check out [live demo](https://clone-9c3af.web.app) deployed at Firebase.
 - [ReactJS](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html)
-- [Styles Components](https://styled-components.com/)
+- [Styled Components](https://styled-components.com/)
 - [React Router DOM](https://reactrouter.com/)
 - [React Context API](https://reactjs.org/docs/context.html)
 - [Immer](https://immerjs.github.io/immer/docs/introduction) / [useImmer](https://github.com/immerjs/use-immer)
