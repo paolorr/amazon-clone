@@ -18,7 +18,7 @@ import {
 } from './styles';
 
 const Header: React.FC = () => {
-  const { user, signOut } = useAuth();
+  const { user, firstName, signOut } = useAuth();
   const {
     cart: { totalItems },
   } = useCart();
@@ -44,8 +44,8 @@ const Header: React.FC = () => {
         <Link to={!user ? '/login' : '/'}>
           <NavOption onClick={handleAuthentication}>
             <NavOptionLineOne>
-              Hello
-              {user ? ' User' : ' Guest'}
+              {/*  eslint-disable-next-line react/jsx-one-expression-per-line */}
+              Hello {firstName}
             </NavOptionLineOne>
             <NavOptionLineTwo>{user ? 'Sign Out' : 'Sign In'}</NavOptionLineTwo>
           </NavOption>

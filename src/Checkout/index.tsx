@@ -9,7 +9,7 @@ import Subtotal from './Subtotal';
 import { Container, Left, Basket, Right } from './styles';
 
 const Checkout: React.FC = () => {
-  const { user } = useAuth();
+  const { displayName } = useAuth();
   const {
     cart: { items: basket },
   } = useCart();
@@ -20,12 +20,10 @@ const Checkout: React.FC = () => {
         <img src="https://images-na.ssl-images-amazon.com/images/G/02/UK_CCMP/TM/OCC_Amazon1._CB423492668_.jpg" />
 
         <Basket>
-          {user && (
-            <h3>
-              {/*  eslint-disable-next-line react/jsx-one-expression-per-line */}
-              Hello {user.email}
-            </h3>
-          )}
+          <h3>
+            {/*  eslint-disable-next-line react/jsx-one-expression-per-line */}
+            Hello {displayName}
+          </h3>
           <h2>Your shopping Basket</h2>
 
           {basket.map(item => (

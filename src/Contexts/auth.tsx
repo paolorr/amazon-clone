@@ -11,6 +11,8 @@ import { auth } from '../firebase';
 
 interface AuthState {
   user: User;
+  displayName: string;
+  firstName: string;
 }
 
 interface SignInCredentials {
@@ -18,16 +20,23 @@ interface SignInCredentials {
   password: string;
 }
 
-type SignUpCredentials = SignInCredentials;
+interface SignUpCredentials extends SignInCredentials {
+  name: string;
+}
 
 interface AuthContextData {
   user?: User;
+  displayName: string;
+  firstName: string;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): Promise<void>;
   signUp(credentials: SignUpCredentials): Promise<void>;
 }
 
-const initialState = {} as AuthState;
+const initialState = {
+  displayName: 'Guest',
+  firstName: 'Guest',
+} as AuthState;
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -47,17 +56,44 @@ const AuthProvider: React.FC = ({ children }) => {
     setData(initialState);
   }, []);
 
-  const signUp = useCallback(async ({ email, password }) => {
-    console.log('signUp');
-    await auth.createUserWithEmailAndPassword(email, password);
+  const parseDisplayNameAndFirstName = useCallback((name): {
+    displayName: string;
+    firstName: string;
+  } => {
+    let displayName = name;
+    let firstName = displayName;
+    if (displayName) {
+      firstName = displayName?.split(' ')[0] || 'User';
+    } else {
+      displayName = 'User';
+      firstName = displayName;
+    }
+
+    return { displayName, firstName };
   }, []);
+
+  const signUp = useCallback(
+    async ({ email, password, name }) => {
+      console.log('signUp');
+      await auth.createUserWithEmailAndPassword(email, password);
+      await auth.currentUser?.updateProfile({ displayName: name });
+      const { displayName, firstName } = parseDisplayNameAndFirstName(
+        auth.currentUser?.displayName,
+      );
+      setData(currentData => ({ ...currentData, displayName, firstName }));
+    },
+    [parseDisplayNameAndFirstName],
+  );
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(authUser => {
       console.log('USER >>>', authUser);
 
       if (authUser) {
-        setData({ user: authUser });
+        const { displayName, firstName } = parseDisplayNameAndFirstName(
+          authUser.displayName,
+        );
+        setData({ user: authUser, displayName, firstName });
       } else {
         setData(initialState);
       }
@@ -66,10 +102,19 @@ const AuthProvider: React.FC = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [parseDisplayNameAndFirstName]);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut, signUp }}>
+    <AuthContext.Provider
+      value={{
+        user: data.user,
+        displayName: data.displayName,
+        firstName: data.firstName,
+        signIn,
+        signOut,
+        signUp,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
