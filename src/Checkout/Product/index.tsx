@@ -65,11 +65,11 @@ const Product: React.FC<ProductProps> = ({
           Quantity:
           <strong>{quantity}</strong>
           <IncreaseDecrease>
-            <button onClick={handleIncreaseItem}>
-              <PlusIcon />
-            </button>
             <button onClick={handleDecreaseItem}>
               <MinusIcon />
+            </button>
+            <button onClick={handleIncreaseItem}>
+              <PlusIcon />
             </button>
           </IncreaseDecrease>
         </Quantity>
