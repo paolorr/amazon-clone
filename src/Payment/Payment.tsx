@@ -114,7 +114,7 @@ const Payment: React.FC = () => {
         alert('Stripe or CardElement not loaded');
       }
     },
-    [emptyCart, stripe, elements, clientSecret],
+    [emptyCart, stripe, elements, clientSecret, history],
   );
 
   const handleCreditCardChange = useCallback(
