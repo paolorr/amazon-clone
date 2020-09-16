@@ -41,7 +41,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const addToCart = useCallback(
     (item: Omit<Product, 'quantity'>): void => {
-      console.log('addToCart');
+      // console.log('addToCart');
 
       setCart(draftCart => {
         const index = draftCart.items.findIndex(
@@ -65,7 +65,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const removeFromCart = useCallback(
     (id: string): void => {
-      console.log('removeFromCart');
+      // console.log('removeFromCart');
 
       setCart(draftCart => {
         const index = draftCart.items.findIndex(product => product.id === id);
@@ -74,9 +74,7 @@ const CartProvider: React.FC = ({ children }) => {
         if (index >= 0) {
           [removedItem] = draftCart.items.splice(index, 1);
         } else {
-          console.warn(
-            `Can't remove product (id: ${id}) as it's not in basket!`,
-          );
+          alert(`Can't remove product (id: ${id}) as it's not in basket!`);
           return;
         }
 
@@ -91,7 +89,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const increaseItem = useCallback(
     (id: string): void => {
-      console.log('increaseItem');
+      // console.log('increaseItem');
 
       setCart(draftCart => {
         const index = draftCart.items.findIndex(product => product.id === id);
@@ -100,9 +98,7 @@ const CartProvider: React.FC = ({ children }) => {
         if (index >= 0) {
           item = draftCart.items[index];
         } else {
-          console.warn(
-            `Can't increase product (id: ${id}) as it's not in basket!`,
-          );
+          alert(`Can't increase product (id: ${id}) as it's not in basket!`);
           return;
         }
 
@@ -120,7 +116,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const decreaseItem = useCallback(
     (id: string): void => {
-      console.log('decreaseItem');
+      // console.log('decreaseItem');
 
       setCart(draftCart => {
         const index = draftCart.items.findIndex(product => product.id === id);
@@ -129,9 +125,7 @@ const CartProvider: React.FC = ({ children }) => {
         if (index >= 0) {
           item = draftCart.items[index];
         } else {
-          console.warn(
-            `Can't decrease product (id: ${id}) as it's not in basket!`,
-          );
+          alert(`Can't decrease product (id: ${id}) as it's not in basket!`);
           return;
         }
 

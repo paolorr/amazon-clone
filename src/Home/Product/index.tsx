@@ -16,7 +16,7 @@ const Product: React.FC<ProductProps> = ({
   const { addToCart } = useCart();
 
   const handleAddToCart = useCallback(() => {
-    console.log('handleAddToCart');
+    // console.log('handleAddToCart');
 
     addToCart({
       id,

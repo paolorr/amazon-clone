@@ -27,17 +27,17 @@ const Product: React.FC<ProductProps> = ({
   const { removeFromCart, increaseItem, decreaseItem } = useCart();
 
   const handleRemoveFromCart = useCallback(() => {
-    console.log('handleRemoveFromCart');
+    // console.log('handleRemoveFromCart');
     removeFromCart(id);
   }, [removeFromCart, id]);
 
   const handleIncreaseItem = useCallback(() => {
-    console.log('handleIncreaseItem');
+    // console.log('handleIncreaseItem');
     increaseItem(id);
   }, [increaseItem, id]);
 
   const handleDecreaseItem = useCallback(() => {
-    console.log('handleDecreaseItem');
+    // console.log('handleDecreaseItem');
     decreaseItem(id);
   }, [decreaseItem, id]);
 

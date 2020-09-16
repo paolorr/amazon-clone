@@ -46,12 +46,12 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    console.log('signIn');
+    // console.log('signIn');
     await auth.signInWithEmailAndPassword(email, password);
   }, []);
 
   const signOut = useCallback(async () => {
-    console.log('signOut');
+    // console.log('signOut');
     await auth.signOut();
     setData(initialState);
   }, []);
@@ -74,7 +74,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signUp = useCallback(
     async ({ email, password, name }) => {
-      console.log('signUp');
+      // console.log('signUp');
       await auth.createUserWithEmailAndPassword(email, password);
       await auth.currentUser?.updateProfile({ displayName: name });
       const { displayName, firstName } = parseDisplayNameAndFirstName(
@@ -87,7 +87,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(authUser => {
-      console.log('USER >>>', authUser);
+      // console.log('USER >>>', authUser);
 
       if (authUser) {
         const { displayName, firstName } = parseDisplayNameAndFirstName(
