@@ -1,0 +1,37 @@
+{
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "watch": "npm run build -- --watch",
+    "config:set": "firebase functions:config:set env=\"$(cat ./env/.env.json)\"",
+    "config:set:dev": "firebase -P dev functions:config:set env=\"$(cat ./env/.env.dev.json)\"",
+    "config:set2": "node ./env/set-config",
+    "config:set:dev2": "node ./env/set-config dev",
+    "config:get": "firebase functions:config:get > .runtimeconfig.json",
+    "config:setget": "npm run config:set && npm run config:get",
+    "config:unset": "firebase functions:config:unset env"
+
+  },
+  "engines": {
+    "node": "10"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.10.0",
+    "firebase-functions": "^3.6.1",
+    "stripe": "^8.96.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.7",
+    "firebase-functions-test": "^0.2.0",
+    "typescript": "^3.8.0"
+  },
+  "private": true
+}

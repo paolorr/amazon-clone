@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import CurrencyFormat from 'react-currency-format';
+import { useHistory } from 'react-router-dom';
 
 import { useCart } from '../../Contexts/cart';
 
@@ -11,6 +12,7 @@ const Subtotal: React.FC = () => {
   const {
     cart: { totalItems, subtotal },
   } = useCart();
+  const history = useHistory();
 
   return (
     <Container>
@@ -32,7 +34,9 @@ const Subtotal: React.FC = () => {
         prefix="$"
       />
 
-      <button>Proceed to Checkout</button>
+      <button onClick={() => history.push('/payment')}>
+        Proceed to Checkout
+      </button>
     </Container>
   );
 };

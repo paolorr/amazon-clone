@@ -4,6 +4,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import Header from '../Header';
 import Home from '../Home';
 import Checkout from '../Checkout';
+import Payment from '../Payment';
 import Login from '../Login';
 
 const Routes: React.FC = () => {
@@ -22,6 +23,13 @@ const Routes: React.FC = () => {
       <Route path="/checkout" exact>
         <Header />
         <Checkout />
+      </Route>
+      <Route path="/payment" exact>
+        <Header />
+        <Payment />
+      </Route>
+      <Route path="/orders" exact>
+        <h1>Orders</h1>
       </Route>
       <Route path="/login" exact component={Login} />
       <Route>

@@ -22,6 +22,7 @@ interface CartContextData {
   removeFromCart(productId: string): void;
   increaseItem(productId: string): void;
   decreaseItem(productIf: string): void;
+  emptyCart(): void;
 }
 
 const initialState: CartState = {
@@ -145,9 +146,24 @@ const CartProvider: React.FC = ({ children }) => {
     [setCart],
   );
 
+  const emptyCart = useCallback((): void => {
+    // console.emptyCart');
+
+    setCart(draftCart => {
+      return initialState;
+    });
+  }, [setCart]);
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, increaseItem, decreaseItem }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        increaseItem,
+        decreaseItem,
+        emptyCart,
+      }}
     >
       {children}
     </CartContext.Provider>
