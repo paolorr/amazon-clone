@@ -50,10 +50,12 @@ const Header: React.FC = () => {
             <NavOptionLineTwo>{user ? 'Sign Out' : 'Sign In'}</NavOptionLineTwo>
           </NavOption>
         </Link>
-        <NavOption>
-          <NavOptionLineOne>Returns</NavOptionLineOne>
-          <NavOptionLineTwo>& Order</NavOptionLineTwo>
-        </NavOption>
+        <Link to="/orders">
+          <NavOption>
+            <NavOptionLineOne>Returns</NavOptionLineOne>
+            <NavOptionLineTwo>& Orders</NavOptionLineTwo>
+          </NavOption>
+        </Link>
         <NavOption>
           <NavOptionLineOne>Your</NavOptionLineOne>
           <NavOptionLineTwo>Prime</NavOptionLineTwo>

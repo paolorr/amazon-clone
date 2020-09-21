@@ -14,7 +14,9 @@ import {
   IncreaseDecrease,
 } from './styles';
 
-type ProductProps = CartProduct;
+type ProductProps = CartProduct & {
+  hideButtons?: boolean;
+};
 
 const Product: React.FC<ProductProps> = ({
   id,
@@ -23,6 +25,7 @@ const Product: React.FC<ProductProps> = ({
   price,
   quantity,
   rating,
+  hideButtons = false,
 }) => {
   const { removeFromCart, increaseItem, decreaseItem } = useCart();
 
@@ -64,17 +67,21 @@ const Product: React.FC<ProductProps> = ({
         <Quantity>
           Quantity:
           <strong>{quantity}</strong>
-          <IncreaseDecrease>
-            <button onClick={handleDecreaseItem}>
-              <MinusIcon />
-            </button>
-            <button onClick={handleIncreaseItem}>
-              <PlusIcon />
-            </button>
-          </IncreaseDecrease>
+          {!hideButtons && (
+            <IncreaseDecrease>
+              <button onClick={handleDecreaseItem}>
+                <MinusIcon />
+              </button>
+              <button onClick={handleIncreaseItem}>
+                <PlusIcon />
+              </button>
+            </IncreaseDecrease>
+          )}
         </Quantity>
 
-        <button onClick={handleRemoveFromCart}>Remove from cart</button>
+        {!hideButtons && (
+          <button onClick={handleRemoveFromCart}>Remove from cart</button>
+        )}
       </Info>
     </Container>
   );

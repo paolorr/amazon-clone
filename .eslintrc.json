@@ -55,7 +55,8 @@
     "react/button-has-type": "off",
     "react/no-array-index-key": "off",
     "no-alert": "off",
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {

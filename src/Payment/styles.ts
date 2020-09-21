@@ -31,6 +31,27 @@ export const Address = styled(Content)``;
 
 export const Basket = styled(Content)``;
 
-export const PaymentMethod = styled(Content)``;
+export const PaymentMethod = styled(Content)`
+  form {
+    max-width: 400px;
+  }
 
-export const Price = styled.div``;
+  h3 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+`;
+
+export const Price = styled.div`
+  button {
+    background: #f0c14b;
+    border-radius: 2px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid;
+    font-weight: bolder;
+    margin-top: 10px;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111;
+  }
+`;

@@ -5,6 +5,7 @@ import Header from '../Header';
 import Home from '../Home';
 import Checkout from '../Checkout';
 import Payment from '../Payment';
+import Orders from '../Orders';
 import Login from '../Login';
 
 const Routes: React.FC = () => {
@@ -29,7 +30,8 @@ const Routes: React.FC = () => {
         <Payment />
       </Route>
       <Route path="/orders" exact>
-        <h1>Orders</h1>
+        <Header />
+        <Orders />
       </Route>
       <Route path="/login" exact component={Login} />
       <Route>

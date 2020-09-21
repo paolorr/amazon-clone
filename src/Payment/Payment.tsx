@@ -8,6 +8,7 @@ import { useAuth } from '../Contexts/auth';
 import { useCart } from '../Contexts/cart';
 
 import axios from '../axios';
+import { db } from '../firebase';
 
 import Product from '../Checkout/Product';
 
@@ -22,7 +23,7 @@ import {
 } from './styles';
 
 const Payment: React.FC = () => {
-  const { displayName } = useAuth();
+  const { displayName, user } = useAuth();
   const {
     cart: { items: basket, totalItems, subtotal },
     emptyCart,
@@ -92,6 +93,29 @@ const Payment: React.FC = () => {
 
           if (!err) {
             console.log('SUCCESS');
+
+            let amount = 0;
+            let created_at;
+
+            if (paymentIntent?.amount) {
+              amount = paymentIntent?.amount / 100;
+            }
+
+            if (paymentIntent?.created) {
+              created_at = new Date(paymentIntent?.created * 1000);
+            }
+
+            await db
+              .collection('users')
+              .doc(user?.uid)
+              .collection('orders')
+              .doc(paymentIntent?.id)
+              .set({
+                amount,
+                created_at,
+                items: basket,
+              });
+
             setClientSecret('');
             setSucceeded(true);
             setError(null);
@@ -114,7 +138,7 @@ const Payment: React.FC = () => {
         alert('Stripe or CardElement not loaded');
       }
     },
-    [emptyCart, stripe, elements, clientSecret, history],
+    [emptyCart, stripe, elements, clientSecret, history, user, basket],
   );
 
   const handleCreditCardChange = useCallback(
