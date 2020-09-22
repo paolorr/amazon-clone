@@ -1,12 +1,25 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-param-reassign */
+
+// this script is not being used, it'`s just for the record
+// add to package.json scripts
+//  "config:set": "node ./env/set-config",
+//  "config:set:dev": "node ./env/set-config dev",
+
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
 
 const env = process.argv[2];
 
-const configPath = path.resolve(__dirname, env ? `.env2.${env}.json` : '.env2.json');
+const configPath = path.resolve(
+  __dirname,
+  env ? `.env.${env}.json` : '.env.json',
+);
 
 if (!(configPath && fs.existsSync(configPath))) {
-  console.error(`File \'${configPath}\' not found.`);
+  console.error(`File '${configPath}' not found.`);
   return;
 }
 

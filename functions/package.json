@@ -8,14 +8,11 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "watch": "npm run build -- --watch",
-    "config:set": "firebase functions:config:set env=\"$(cat ./env/.env.json)\"",
-    "config:set:dev": "firebase -P dev functions:config:set env=\"$(cat ./env/.env.dev.json)\"",
-    "config:set2": "node ./env/set-config",
-    "config:set:dev2": "node ./env/set-config dev",
+    "config:set": "firebase functions:config:set env=\"$(cat .env.json)\"",
+    "config:set:dev": "firebase -P dev functions:config:set env=\"$(cat .env.dev.json)\"",
     "config:get": "firebase functions:config:get > .runtimeconfig.json",
     "config:setget": "npm run config:set && npm run config:get",
     "config:unset": "firebase functions:config:unset env"
-
   },
   "engines": {
     "node": "10"
