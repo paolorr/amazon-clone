@@ -71,7 +71,7 @@ To run and deploy you sould have [Node.js 12.x](https://nodejs.org/) and [Yarn 1
 
     `cd functions && yarn config:setget && cd ..`
 
-    (this creates `.runtimeconfig.json` on functions folder)
+    (this creates `functions/.runtimeconfig.json`)
 
 ### Run locally
 
